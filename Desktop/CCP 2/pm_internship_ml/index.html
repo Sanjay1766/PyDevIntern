@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PM Internship ML Search</title>
+    <title>PM Internship Search | AI-Powered Career Discovery</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,426 +16,664 @@
         }
 
         :root {
-            --primary: #1DA1F2;
-            --primary-dark: #1a91da;
-            --secondary: #17BF63;
-            --danger: #E74C3C;
-            --gray-50: #f7f9fa;
-            --gray-100: #eff5f8;
-            --gray-200: #e1e8ed;
-            --gray-300: #cfd9e3;
-            --gray-400: #bbb;
-            --gray-dark: #0f1419;
-            --text-secondary: #657786;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --primary-light: #eef2ff;
+            --secondary: #ec4899;
+            --success: #10b981;
+            --success-light: #d1fae5;
+            --warning: #f59e0b;
+            --text: #0f172a;
+            --text-secondary: #475569;
+            --text-light: #94a3b8;
+            --border: #e2e8f0;
+            --bg: #f8fafc;
+            --bg-dark: #0f172a;
+            --white: #ffffff;
+            --radius: 12px;
+            --radius-lg: 20px;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+            --gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #f0f4f8 0%, #e8f1f7 50%, #f5f0ff 100%);
-            background-attachment: fixed;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
             min-height: 100vh;
-            padding: 0;
-            color: var(--gray-dark);
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        /* Animated Background */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
         }
 
-        nav {
-            background: white;
-            border-bottom: 1px solid var(--gray-200);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            padding: 16px 24px;
             position: sticky;
             top: 0;
             z-index: 100;
+            animation: slideDown 0.5s ease;
         }
 
-        .nav-container {
-            max-width: 1200px;
+        .header-content {
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 70px;
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text);
             text-decoration: none;
-            font-size: 1.6em;
-            font-weight: 800;
-            color: var(--primary);
-        }
-
-        .logo i {
-            font-size: 1.8em;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .logo span {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-actions {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .nav-btn {
-            padding: 10px 18px;
-            background: transparent;
-            color: var(--primary);
-            border: 1.5px solid var(--primary);
-            border-radius: 6px;
-            font-size: 0.9em;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 10px;
         }
 
-        .nav-btn:hover {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 12px rgba(29, 161, 242, 0.2);
+        .logo:hover {
+            transform: scale(1.02);
         }
 
-        header {
-            text-align: center;
-            color: var(--gray-dark);
-            margin-bottom: 50px;
-            padding: 80px 20px 40px;
-        }
-
-        header h1 {
-            font-size: 3.5em;
-            margin-bottom: 15px;
-            font-weight: 800;
-            letter-spacing: -1px;
-            color: var(--gray-dark);
-            animation: slideDown 0.8s ease;
-        }
-
-        header p {
-            font-size: 1.2em;
-            color: var(--text-secondary);
-            font-weight: 400;
-            letter-spacing: 0.3px;
-            margin: 0;
-            animation: slideDown 0.8s ease 0.1s both;
-        }
-
-        .header-icon {
-            font-size: 4em;
-            margin-bottom: 20px;
-            display: block;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        .search-section {
-            background: white;
-            border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 40px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 0.8s ease 0.2s both;
-            border: 1px solid var(--gray-200);
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .search-form {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr 1fr 150px;
-            gap: 20px;
-            align-items: end;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--gray-dark);
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-        }
-
-        .form-group input,
-        .form-group select {
-            padding: 14px 16px;
-            border: 1.5px solid var(--gray-200);
-            border-radius: 8px;
-            font-size: 1em;
-            transition: var(--transition);
-            background: var(--gray-50);
-            color: var(--gray-dark);
-        }
-
-        .form-group input::placeholder {
-            color: var(--gray-400);
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: white;
-            box-shadow: 0 0 0 4px rgba(29, 161, 242, 0.1);
-        }
-
-        .search-btn {
-            padding: 14px 32px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.95em;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            height: 50px;
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--gradient-primary);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
+            font-size: 16px;
+        }
+
+        .logo span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-links {
+            display: flex;
             gap: 8px;
-            box-shadow: 0 4px 12px rgba(29, 161, 242, 0.25);
+            align-items: center;
         }
 
-        .search-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(29, 161, 242, 0.35);
-        }
-
-        .search-btn:active:not(:disabled) {
-            transform: translateY(0);
-        }
-
-        .search-btn:disabled {
-            opacity: 0.75;
-            cursor: not-allowed;
-        }
-
-        .spinner {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            border: 3px solid rgba(255,255,255,0.2);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .results-section {
-            display: none;
-            animation: fadeIn 0.6s ease;
-            margin-bottom: 60px;
-        }
-
-        .results-section.show {
-            display: block;
-        }
-
-        .results-header {
-            color: var(--gray-dark);
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid var(--primary);
-        }
-
-        .results-header h2 {
-            font-size: 2.2em;
-            margin-bottom: 10px;
-            font-weight: 800;
-        }
-
-        .results-count {
+        .header-link {
             color: var(--text-secondary);
-            font-size: 1.05em;
-            font-weight: 400;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 10px 16px;
+            border-radius: 10px;
+            position: relative;
         }
 
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 28px;
+        .header-link:hover {
+            color: var(--primary);
+            background: var(--primary-light);
         }
 
-        .internship-card {
-            background: white;
-            border-radius: 12px;
-            padding: 28px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
-            border: 1px solid var(--gray-200);
-            border-left: 4px solid var(--primary);
-            animation: fadeIn 0.5s ease both;
+        .header-link-primary {
+            background: var(--gradient-primary);
+            color: white !important;
+            font-weight: 600;
+        }
+
+        .header-link-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+            background: var(--gradient-primary);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: var(--gradient-hero);
+            padding: 80px 24px 120px;
             position: relative;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
         }
 
-        .internship-card::before {
+        .hero-section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 0;
-            pointer-events: none;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
         }
 
-        .internship-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-            border-left-width: 5px;
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }
 
-        .internship-card:hover::before {
-            opacity: 0.02;
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
         }
 
-        .card-content {
+        .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; top: 60%; animation-delay: 2s; }
+        .particle:nth-child(3) { left: 35%; top: 30%; animation-delay: 4s; }
+        .particle:nth-child(4) { left: 50%; top: 70%; animation-delay: 6s; }
+        .particle:nth-child(5) { left: 65%; top: 25%; animation-delay: 8s; }
+        .particle:nth-child(6) { left: 80%; top: 55%; animation-delay: 10s; }
+        .particle:nth-child(7) { left: 90%; top: 35%; animation-delay: 12s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(20px); opacity: 0; }
+        }
+
+        .hero {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
             position: relative;
             z-index: 1;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
         }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            gap: 12px;
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 24px;
+            animation: fadeInUp 0.6s ease;
         }
 
-        .card-title {
-            font-size: 1.28em;
+        .hero-badge i {
+            color: var(--warning);
+        }
+
+        .hero h1 {
+            font-size: 52px;
             font-weight: 800;
-            color: var(--gray-dark);
-            line-height: 1.3;
-            flex-grow: 1;
-        }
-
-        .relevance-badge {
-            background: linear-gradient(135deg, var(--secondary) 0%, #0fb76d 100%);
+            margin-bottom: 20px;
             color: white;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: 700;
-            white-space: nowrap;
-            min-width: fit-content;
-            box-shadow: 0 2px 8px rgba(23, 191, 99, 0.2);
+            line-height: 1.1;
+            animation: fadeInUp 0.6s ease 0.1s both;
         }
 
-        .card-company {
-            font-size: 0.95em;
-            color: var(--primary);
-            font-weight: 700;
-            margin-bottom: 15px;
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, #a5b4fc 0%, #f9a8d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto 32px;
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin-top: 40px;
+            animation: fadeInUp 0.6s ease 0.3s both;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: white;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            margin-top: -60px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Search Box */
+        .search-box {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-xl);
+            transition: all 0.4s ease;
+        }
+
+        .search-box:focus-within {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-xl), 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 20px;
+            align-items: end;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
             display: flex;
             align-items: center;
             gap: 8px;
-        }
-
-        .card-category {
-            display: inline-block;
-            background: var(--gray-100);
-            color: var(--primary);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85em;
+            font-size: 13px;
             font-weight: 600;
-            margin-bottom: 15px;
-            border: 1px solid var(--gray-200);
-        }
-
-        .card-description {
             color: var(--text-secondary);
-            font-size: 0.95em;
-            line-height: 1.6;
-            margin-bottom: 18px;
-            flex-grow: 1;
-        }
-
-        .card-skills {
-            margin-bottom: 20px;
-        }
-
-        .card-skills-label {
-            font-weight: 700;
-            color: var(--gray-dark);
-            font-size: 0.9em;
             margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            opacity: 0.8;
         }
 
-        .skills-list {
+        .form-group label i {
+            color: var(--primary);
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 15px;
+            font-family: inherit;
+            color: var(--text);
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-light);
+        }
+
+        .search-btn {
+            padding: 14px 32px;
+            background: var(--gradient-primary);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius);
+            font-size: 15px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            height: 52px;
+            min-width: 140px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .search-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .search-btn:hover::before {
+            left: 100%;
+        }
+
+        .search-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .search-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Quick Tags */
+        .quick-tags {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .quick-tags-label {
+            font-size: 13px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .quick-tag {
+            padding: 8px 16px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+            font-family: inherit;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-tag:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .quick-tag:active {
+            transform: translateY(0);
+        }
+
+        /* Error Message */
+        .error-msg {
+            background: linear-gradient(135deg, #fef2f2 0%, #fff1f2 100%);
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 16px 20px;
+            border-radius: var(--radius);
+            margin-bottom: 24px;
+            font-size: 14px;
+            display: none;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .error-msg::before {
+            content: '\f071';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+        }
+
+        .error-msg.show {
+            display: flex;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+
+        /* Results */
+        .results {
+            display: none;
+            margin-top: 40px;
+        }
+
+        .results.show {
+            display: block;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .results-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .results-count {
+            font-size: 14px;
+            color: var(--text-light);
+            background: var(--bg);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-weight: 500;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 24px;
+        }
+
+        /* Card */
+        .card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-8px);
+            border-color: transparent;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover .card-title {
+            color: var(--primary);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+            transition: color 0.3s ease;
+        }
+
+        .card-company {
+            font-size: 14px;
+            color: var(--primary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card-company::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        .card-score {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            color: #047857;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card-score::before {
+            content: '\f005';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 10px;
+        }
+
+        .card:hover .card-score {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: var(--white);
+            transform: scale(1.05);
+        }
+
+        .card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .card-meta-item {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg);
+            padding: 6px 12px;
+            border-radius: 8px;
+        }
+
+        .card-meta-item i {
+            font-size: 12px;
+            color: var(--primary);
+        }
+
+        .card-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.6;
+        }
+
+        .card-skills {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
+            margin-bottom: 20px;
         }
 
-        .skill-tag {
-            background: var(--gray-100);
+        .skill {
+            padding: 6px 12px;
+            background: var(--primary-light);
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
             color: var(--primary);
-            padding: 5px 12px;
-            border-radius: 16px;
-            font-size: 0.8em;
-            font-weight: 600;
-            border: 1px solid var(--gray-200);
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
-        .skill-tag:hover {
+        .skill:hover {
             background: var(--primary);
             color: white;
             transform: translateY(-2px);
@@ -440,690 +681,1024 @@
 
         .card-actions {
             display: flex;
-            gap: 10px;
-            padding-top: 18px;
-            border-top: 1px solid var(--gray-200);
-            margin-top: auto;
+            gap: 12px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
         }
 
         .card-btn {
             flex: 1;
-            padding: 10px 14px;
-            border: 1px solid var(--primary);
-            background: white;
-            color: var(--primary);
-            border-radius: 6px;
-            font-size: 0.9em;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            text-align: center;
+            padding: 12px 20px;
+            border-radius: var(--radius);
+            font-size: 14px;
+            font-weight: 600;
             text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 8px;
         }
 
-        .card-btn:hover {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 12px rgba(29, 161, 242, 0.25);
+        .card-btn-primary {
+            background: var(--gradient-primary);
+            color: var(--white);
+            border: none;
         }
 
-        .card-btn.primary {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
+        .card-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
         }
 
-        .card-btn.primary:hover {
-            background: var(--primary-dark);
-            border-color: var(--primary-dark);
+        .card-btn-primary:active {
+            transform: translateY(0);
         }
 
-        .no-results {
-            background: white;
-            border-radius: 12px;
-            padding: 80px 30px;
-            text-align: center;
+        .card-btn-secondary {
+            background: var(--white);
             color: var(--text-secondary);
-            grid-column: 1 / -1;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--gray-200);
+            border: 2px solid var(--border);
         }
 
-        .no-results i {
-            font-size: 4em;
-            color: var(--gray-300);
-            margin-bottom: 20px;
-            display: block;
+        .card-btn-secondary:hover {
+            background: var(--bg);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 80px 20px;
+            background: var(--white);
+            border: 2px dashed var(--border);
+            border-radius: var(--radius-lg);
+        }
+
+        .no-results-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 32px;
+            color: var(--text-light);
+        }
+
+        .no-results h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text);
         }
 
         .no-results p {
-            font-size: 1.1em;
-            margin-bottom: 10px;
-            color: var(--gray-dark);
+            font-size: 15px;
+            color: var(--text-light);
         }
 
-        .error-message {
-            background: linear-gradient(135deg, var(--danger), #e85d3f);
+        /* Features Section */
+        .features {
+            margin-top: 80px;
+            padding: 80px 0;
+            background: linear-gradient(180deg, transparent 0%, var(--bg) 100%);
+        }
+
+        .features-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        .features-subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 48px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 40px 32px;
+            border-radius: var(--radius-lg);
+            background: var(--white);
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .feature:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: transparent;
+        }
+
+        .feature:hover::before {
+            opacity: 1;
+        }
+
+        .feature:hover .feature-icon {
+            background: rgba(255, 255, 255, 0.2);
             color: white;
-            padding: 16px 20px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            border-left: 4px solid #c0392b;
-            display: none;
-            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);
-            animation: slideDown 0.4s ease;
+            transform: scale(1.1) rotate(5deg);
         }
 
-        .error-message i {
-            font-size: 1.2em;
-            margin-right: 12px;
+        .feature:hover h3,
+        .feature:hover p {
+            color: white;
+            position: relative;
+            z-index: 1;
         }
 
-        .error-message.show {
+        .feature-icon {
+            width: 72px;
+            height: 72px;
+            background: var(--primary-light);
+            border-radius: 16px;
             display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            color: var(--primary);
+            font-size: 28px;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text);
+            position: relative;
+            z-index: 1;
+            transition: color 0.4s ease;
+        }
+
+        .feature p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+            transition: color 0.4s ease;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 60px 24px 40px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: 16px;
+            display: inline-flex;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 300px;
+            line-height: 1.7;
+        }
+
+        .footer-links h4 {
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-links a {
+            display: block;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
         }
 
-        @media (max-width: 768px) {
-            .search-form {
-                grid-template-columns: 1fr;
-            }
-
-            .search-btn {
-                width: 100%;
-            }
-
-            header h1 {
-                font-size: 2.2em;
-            }
-
-            .results-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .card-header {
-                flex-direction: column;
-            }
-
-            .relevance-badge {
-                align-self: flex-start;
-            }
-
-            .card-actions {
-                flex-direction: column;
-            }
-
-            .nav-container {
-                flex-wrap: wrap;
-                height: auto;
-                padding: 15px 20px;
-            }
-
-            .nav-actions {
-                width: 100%;
-                margin-top: 15px;
-            }
+        .footer-bottom p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
         }
 
-        /* Modal Styles */
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-4px);
+        }
+
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
-            left: 0;
             top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            animation: fadeIn 0.3s ease;
-            overflow-y: auto;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
         }
 
         .modal.show {
             display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .modal-content {
-            background: white;
-            padding: 50px;
-            border-radius: 16px;
-            max-width: 700px;
+        .modal-box {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            max-width: 600px;
+            width: 100%;
             max-height: 85vh;
             overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideDown 0.3s ease;
+            box-shadow: var(--shadow-xl);
         }
 
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 20px;
+            padding: 24px 28px;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(135deg, var(--primary-light) 0%, #fce7f3 100%);
         }
 
         .modal-header h2 {
-            font-size: 2em;
-            font-weight: 800;
-            color: var(--gray-dark);
-            margin: 0;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
         }
 
-        .close-btn {
-            background: none;
+        .modal-close {
+            width: 36px;
+            height: 36px;
             border: none;
-            font-size: 1.5em;
-            color: var(--text-secondary);
+            background: var(--white);
+            border-radius: 10px;
             cursor: pointer;
-            transition: var(--transition);
-            padding: 5px;
+            font-size: 20px;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .close-btn:hover {
-            color: var(--danger);
+        .modal-close:hover {
+            background: #fee2e2;
+            color: #dc2626;
             transform: rotate(90deg);
         }
 
         .modal-body {
-            color: var(--text-secondary);
-            line-height: 1.8;
+            padding: 28px;
         }
 
         .modal-body h3 {
-            color: var(--primary);
-            font-size: 1.3em;
-            margin-top: 25px;
-            margin-bottom: 15px;
+            font-size: 16px;
             font-weight: 700;
+            margin: 24px 0 12px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-body h3::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        .modal-body h3:first-child {
+            margin-top: 0;
         }
 
         .modal-body p {
-            margin-bottom: 15px;
-            font-size: 1em;
-        }
-
-        .feature-list {
-            list-style: none;
-            margin: 20px 0;
-            padding: 0;
-        }
-
-        .feature-list li {
-            padding: 12px 0;
-            padding-left: 35px;
-            position: relative;
-            margin-bottom: 10px;
-        }
-
-        .feature-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--secondary);
-            font-weight: 700;
-            font-size: 1.2em;
-        }
-
-        /* Why Section */
-        .why-section {
-            background: white;
-            border-radius: 16px;
-            padding: 50px 40px;
-            margin-bottom: 40px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--gray-200);
-        }
-
-        .why-section h2 {
-            font-size: 2em;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .why-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .why-card {
-            text-align: center;
-            padding: 30px;
-            border-radius: 12px;
-            background: var(--gray-50);
-            border: 1px solid var(--gray-200);
-            transition: var(--transition);
-        }
-
-        .why-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 24px rgba(29, 161, 242, 0.15);
-            border-color: var(--primary);
-        }
-
-        .why-icon {
-            font-size: 2.5em;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .why-card h3 {
-            font-size: 1.2em;
-            font-weight: 700;
-            color: var(--gray-dark);
-            margin-bottom: 12px;
-        }
-
-        .why-card p {
+            font-size: 14px;
             color: var(--text-secondary);
-            font-size: 0.95em;
-            line-height: 1.6;
-            margin: 0;
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+
+        .modal-body ul {
+            list-style: none;
+            margin: 16px 0;
+        }
+
+        .modal-body li {
+            font-size: 14px;
+            color: var(--text-secondary);
+            padding: 12px 16px;
+            padding-left: 40px;
+            position: relative;
+            background: var(--bg);
+            margin-bottom: 8px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .modal-body li:hover {
+            background: var(--primary-light);
+            transform: translateX(4px);
+        }
+
+        .modal-body li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--success);
+            font-size: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
         }
 
         @media (max-width: 768px) {
-            .modal-content {
-                padding: 30px;
-                max-width: 90vw;
+            .header-links {
+                display: none;
             }
 
-            .modal-header h2 {
-                font-size: 1.5em;
+            .hero h1 {
+                font-size: 36px;
             }
 
-            .why-section {
-                padding: 30px 20px;
+            .hero p {
+                font-size: 16px;
             }
 
-            .why-grid {
+            .stats-row {
+                gap: 32px;
+            }
+
+            .stat-number {
+                font-size: 24px;
+            }
+
+            .search-form {
                 grid-template-columns: 1fr;
             }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-actions {
+                flex-direction: column;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-brand p {
+                margin: 0 auto;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 60px 16px 100px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .stats-row {
+                flex-wrap: wrap;
+                gap: 24px;
+            }
+
+            .search-box {
+                padding: 20px;
+            }
+
+            .quick-tags {
+                justify-content: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Search box animation */
+        .search-box {
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+
+        .features {
+            animation: fadeIn 0.6s ease 0.3s both;
+        }
+
+        /* Card stagger animation */
+        .card {
+            animation: fadeIn 0.5s ease both;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.05s; }
+        .card:nth-child(2) { animation-delay: 0.1s; }
+        .card:nth-child(3) { animation-delay: 0.15s; }
+        .card:nth-child(4) { animation-delay: 0.2s; }
+        .card:nth-child(5) { animation-delay: 0.25s; }
+        .card:nth-child(6) { animation-delay: 0.3s; }
+        .card:nth-child(7) { animation-delay: 0.35s; }
+        .card:nth-child(8) { animation-delay: 0.4s; }
+        .card:nth-child(9) { animation-delay: 0.45s; }
+        .card:nth-child(10) { animation-delay: 0.5s; }
+
+        /* Feature card stagger */
+        .feature {
+            animation: fadeInUp 0.5s ease both;
+        }
+
+        .feature:nth-child(1) { animation-delay: 0.1s; }
+        .feature:nth-child(2) { animation-delay: 0.2s; }
+        .feature:nth-child(3) { animation-delay: 0.3s; }
+        .feature:nth-child(4) { animation-delay: 0.4s; }
+
+        /* Modal animations */
+        .modal {
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .modal.show {
+            opacity: 1;
+        }
+
+        .modal-box {
+            animation: scaleIn 0.3s ease;
+        }
+
+        /* Results section animation */
+        .results.show {
+            animation: fadeIn 0.4s ease;
+        }
+
+        /* Loading state */
+        .loading-skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 8px;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav>
-        <div class="nav-container">
+    <div class="bg-pattern"></div>
+    
+    <header>
+        <div class="header-content">
             <a href="#" class="logo">
-                <i class="fas fa-brain"></i>
-                <span>OptiSearch AI</span>
+                <span class="logo-icon"><i class="fas fa-graduation-cap"></i></span>
+                PM <span>Internship</span>
             </a>
-            <div class="nav-actions">
-                <button class="nav-btn" id="howItWorksBtn">
-                    <i class="fas fa-lightbulb"></i> How It Works
-                </button>
-                <button class="nav-btn" id="whyBtn">
-                    <i class="fas fa-star"></i> Why OptiSearch
-                </button>
+            <div class="header-links">
+                <span class="header-link" id="howItWorksBtn"><i class="fas fa-info-circle"></i> How It Works</span>
+                <span class="header-link" id="aboutBtn"><i class="fas fa-users"></i> About</span>
+                <a href="https://internship.pmscheme.in/" target="_blank" class="header-link header-link-primary">
+                    <i class="fas fa-external-link-alt"></i> Official Portal
+                </a>
             </div>
         </div>
-    </nav>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="hero">
+            <div class="hero-badge">
+                <i class="fas fa-sparkles"></i>
+                Powered by Advanced AI
+            </div>
+            <h1>Find Your <span class="gradient-text">Dream Internship</span></h1>
+            <p>Discover PM Internship Scheme opportunities tailored to your skills with our intelligent AI-powered search engine</p>
+            <div class="stats-row">
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Internships</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Companies</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24</span>
+                    <span class="stat-label">Categories</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <div class="search-box">
+            <form class="search-form" id="searchForm">
+                <div class="form-group">
+                    <label for="query"><i class="fas fa-search"></i> Search</label>
+                    <input type="text" id="query" placeholder="Skills, role, or keywords..." required>
+                </div>
+                <div class="form-group">
+                    <label for="location"><i class="fas fa-map-marker-alt"></i> Location</label>
+                    <input type="text" id="location" placeholder="City name...">
+                </div>
+                <div class="form-group">
+                    <label for="searchType"><i class="fas fa-sliders-h"></i> Mode</label>
+                    <select id="searchType">
+                        <option value="semantic">🤖 Semantic (AI)</option>
+                        <option value="keyword">🔤 Keyword</option>
+                    </select>
+                </div>
+                <button type="submit" class="search-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                    Search
+                </button>
+            </form>
+            <div class="quick-tags">
+                <span class="quick-tags-label"><i class="fas fa-fire"></i> Trending:</span>
+                <button type="button" class="quick-tag" data-query="Python Developer">🐍 Python</button>
+                <button type="button" class="quick-tag" data-query="Machine Learning">🤖 ML/AI</button>
+                <button type="button" class="quick-tag" data-query="Web Development">🌐 Web Dev</button>
+                <button type="button" class="quick-tag" data-query="Data Science">📊 Data Science</button>
+                <button type="button" class="quick-tag" data-query="UI UX Design">🎨 Design</button>
+            </div>
+        </div>
+
+        <div class="error-msg" id="errorMsg"></div>
+
+        <div class="results" id="results">
+            <div class="results-header">
+                <span class="results-title">🎯 Search Results</span>
+                <span class="results-count" id="resultsCount"></span>
+            </div>
+            <div class="results-grid" id="resultsGrid"></div>
+        </div>
+
+        <div class="features">
+            <h2 class="features-title">Why Choose Our Search?</h2>
+            <p class="features-subtitle">Experience the next generation of internship discovery with cutting-edge AI technology</p>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                    <h3>AI-Powered Search</h3>
+                    <p>Our semantic search understands context, not just keywords. Find perfect matches even with different terminology.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-map-marked-alt"></i></div>
+                    <h3>Smart Location</h3>
+                    <p>No results nearby? We automatically discover opportunities in surrounding cities sorted by distance.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-percentage"></i></div>
+                    <h3>Match Scoring</h3>
+                    <p>Each result shows a relevance percentage so you can prioritize and focus on the best opportunities.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Lightning Fast</h3>
+                    <p>Pre-computed embeddings and optimized algorithms deliver instant, accurate search results.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <span class="logo-icon"><i class="fas fa-graduation-cap"></i></span>
+                        PM <span>Internship</span>
+                    </a>
+                    <p>Empowering students to discover and secure their dream internships through intelligent AI-powered search technology.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="#" id="footerHow">How It Works</a>
+                    <a href="#" id="footerAbout">About Us</a>
+                    <a href="https://internship.pmscheme.in/" target="_blank">Official Portal</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Popular Searches</h4>
+                    <a href="#">Python Developer</a>
+                    <a href="#">Data Science</a>
+                    <a href="#">Web Development</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <a href="https://internship.pmscheme.in/" target="_blank">PM Scheme Portal</a>
+                    <a href="#">Career Tips</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 PM Internship Search. Built with ❤️ using Machine Learning</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- How It Works Modal -->
     <div class="modal" id="howModal">
-        <div class="modal-content">
+        <div class="modal-box">
             <div class="modal-header">
-                <h2><i class="fas fa-cogs" style="margin-right: 10px; color: var(--primary);"></i>How OptiSearch AI Works</h2>
-                <button class="close-btn" id="closeHow">&times;</button>
+                <h2>🚀 How It Works</h2>
+                <button class="modal-close" id="closeHow">&times;</button>
             </div>
             <div class="modal-body">
-                <h3>🤖 AI-Powered Semantic Search</h3>
-                <p>OptiSearch AI uses advanced machine learning to understand the meaning behind your search query, not just keywords. Instead of looking for exact matches, it finds internships that match your intent.</p>
-
-                <h3>🌍 Smart Geolocation Matching</h3>
-                <p>Can't find internships in your preferred city? OptiSearch AI automatically shows you relevant opportunities in nearby cities, sorted by distance. This ensures you never miss out on great opportunities.</p>
-
-                <h3>📊 Multi-Field Analysis</h3>
-                <p>The system analyzes multiple aspects of each internship:</p>
-                <ul class="feature-list">
-                    <li><strong>Title</strong> - What the role is called</li>
-                    <li><strong>Skills</strong> - Technologies and abilities needed</li>
-                    <li><strong>Description</strong> - What the job entails</li>
-                    <li><strong>Category</strong> - Type of internship</li>
-                    <li><strong>Company</strong> - Organization details</li>
+                <h3>Semantic Search</h3>
+                <p>Unlike traditional keyword matching, our AI understands the meaning behind your query. Search for "web development" and discover "full-stack", "frontend engineer", or "React developer" roles automatically.</p>
+                
+                <h3>Location Intelligence</h3>
+                <p>When no internships are found in your preferred city, the system automatically discovers relevant opportunities in nearby locations, intelligently sorted by distance.</p>
+                
+                <h3>Multi-Field Analysis</h3>
+                <p>Our AI analyzes multiple dimensions of each internship:</p>
+                <ul>
+                    <li>Job title and role requirements</li>
+                    <li>Required skills and technologies</li>
+                    <li>Job description and responsibilities</li>
+                    <li>Company profile and category</li>
                 </ul>
-
-                <h3>⚡ Relevance Scoring</h3>
-                <p>Each result gets a relevance score (0-100%) showing how well it matches your search. Higher scores mean better matches to what you're looking for.</p>
-
-                <h3>🚀 Smart Filtering</h3>
-                <p>Filter by location and search type (Semantic or Keyword mode) to refine your results and find exactly what you need.</p>
+                
+                <h3>Relevance Scoring</h3>
+                <p>Every result includes a match percentage (0-100%) showing how well it aligns with your search criteria, helping you prioritize your applications effectively.</p>
             </div>
         </div>
     </div>
 
-    <!-- Why OptiSearch Modal -->
-    <div class="modal" id="whyModal">
-        <div class="modal-content">
+    <!-- About Modal -->
+    <div class="modal" id="aboutModal">
+        <div class="modal-box">
             <div class="modal-header">
-                <h2><i class="fas fa-trophy" style="margin-right: 10px; color: var(--primary);"></i>Why OptiSearch AI?</h2>
-                <button class="close-btn" id="closeWhy">&times;</button>
+                <h2>ℹ️ About This Project</h2>
+                <button class="modal-close" id="closeAbout">&times;</button>
             </div>
             <div class="modal-body">
-                <p style="font-size: 1.05em; margin-bottom: 30px;">OptiSearch AI transforms how you find internships. Here's why it's game-changing:</p>
-
-                <h3>✨ Beyond Keyword Matching</h3>
-                <p>Traditional search looks for exact keywords. OptiSearch AI understands context. Search for "web development" and find "full-stack engineer" roles. It gets what you really want.</p>
-
-                <h3>🎯 Smarter Results</h3>
-                <p>Not all matches are equal. Our AI ranks results by relevance, putting the best opportunities first. No more sifting through irrelevant listings.</p>
-
-                <h3>🗺️ Location Intelligence</h3>
-                <p>Discover internships in nearby cities automatically. Perfect for flexible candidates who can relocate or commute. Get access to 10x more opportunities.</p>
-
-                <h3>⏱️ Save Time</h3>
-                <p>Spend less time searching, more time applying. Find the right internship 10x faster with AI-powered search instead of manual browsing.</p>
-
-                <h3>🎓 Built for Students</h3>
-                <p>Designed specifically for PM Internship Scheme participants. Understands student needs and matches relevant opportunities based on skills and career goals.</p>
-
-                <h3>🔒 Reliable & Secure</h3>
-                <p>Direct links to the official PM Internship portal. Always up-to-date data. One-click apply to officially posted opportunities.</p>
+                <h3>The Problem</h3>
+                <p>Traditional internship search relies on exact keyword matching, often missing highly relevant opportunities. Location-based searches frequently return empty results when a specific city has no listings.</p>
+                
+                <h3>Our Solution</h3>
+                <p>This project enhances the PM Internship Scheme search with cutting-edge machine learning. Using sentence transformers and cosine similarity, we deliver smarter, more contextual, and highly relevant results.</p>
+                
+                <h3>Key Features</h3>
+                <ul>
+                    <li>Semantic understanding of natural language queries</li>
+                    <li>Automatic nearby location suggestions</li>
+                    <li>Relevance-ranked search results</li>
+                    <li>Multi-field weighted analysis</li>
+                </ul>
+                
+                <h3>Technology Stack</h3>
+                <p>Built with Python, Flask, and Sentence Transformers (all-MiniLM-L6-v2). The modern frontend connects to a local API that processes searches in real-time with lightning-fast response times.</p>
             </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <header>
-            <span class="header-icon">🚀</span>
-            <h1>Find Your Perfect Internship</h1>
-            <p>AI-powered semantic search for PM Internship Scheme opportunities</p>
-        </header>
-
-        <div class="search-section">
-            <form class="search-form" id="searchForm">
-                <div class="form-group">
-                    <label for="query"><i class="fas fa-search"></i> Search Query</label>
-                    <input 
-                        type="text" 
-                        id="query" 
-                        placeholder="e.g., Python, AI, Web Development, Data Science"
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="location"><i class="fas fa-map-marker-alt"></i> Location</label>
-                    <input 
-                        type="text" 
-                        id="location" 
-                        placeholder="e.g., Bangalore, Mumbai"
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="searchType"><i class="fas fa-sliders-h"></i> Search Type</label>
-                    <select id="searchType">
-                        <option value="semantic">Semantic (AI)</option>
-                        <option value="keyword">Keyword</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="search-btn" id="searchBtn">
-                    <i class="fas fa-search"></i>
-                    <span>Search</span>
-                </button>
-            </form>
-        </div>
-
-        <div class="error-message" id="errorMessage">
-            <i class="fas fa-exclamation-circle"></i>
-            <span id="errorText"></span>
-        </div>
-
-        <!-- Why OptiSearch Section -->
-        <div class="why-section">
-            <h2>Why Choose OptiSearch AI?</h2>
-            <div class="why-grid">
-                <div class="why-card">
-                    <div class="why-icon"><i class="fas fa-brain"></i></div>
-                    <h3>AI-Powered</h3>
-                    <p>Advanced ML understands your search intent, not just keywords</p>
-                </div>
-                <div class="why-card">
-                    <div class="why-icon"><i class="fas fa-globe"></i></div>
-                    <h3>Location Smart</h3>
-                    <p>Finds opportunities in nearby cities automatically</p>
-                </div>
-                <div class="why-card">
-                    <div class="why-icon"><i class="fas fa-bolt"></i></div>
-                    <h3>Lightning Fast</h3>
-                    <p>Get results instantly with advanced relevance ranking</p>
-                </div>
-                <div class="why-card">
-                    <div class="why-icon"><i class="fas fa-check-circle"></i></div>
-                    <h3>Accurate Matches</h3>
-                    <p>Relevance scores show how well each matches your needs</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="results-section" id="resultsSection">
-            <div class="results-header">
-                <h2><i class="fas fa-briefcase"></i> Results</h2>
-                <p class="results-count" id="resultsCount"></p>
-            </div>
-            <div class="results-grid" id="resultsGrid"></div>
         </div>
     </div>
 
     <script>
-        const API_BASE_URL = 'http://127.0.0.1:5000';
+        const API_URL = 'http://127.0.0.1:5000';
 
+        // Elements
         const searchForm = document.getElementById('searchForm');
         const searchBtn = document.getElementById('searchBtn');
         const queryInput = document.getElementById('query');
         const locationInput = document.getElementById('location');
         const searchTypeSelect = document.getElementById('searchType');
-        const resultsSection = document.getElementById('resultsSection');
+        const resultsSection = document.getElementById('results');
         const resultsGrid = document.getElementById('resultsGrid');
         const resultsCount = document.getElementById('resultsCount');
-        const errorMessage = document.getElementById('errorMessage');
-        const errorText = document.getElementById('errorText');
+        const errorMsg = document.getElementById('errorMsg');
 
-        // Modal elements
+        // Modals
         const howModal = document.getElementById('howModal');
-        const whyModal = document.getElementById('whyModal');
-        const howBtn = document.getElementById('howItWorksBtn');
-        const whyBtn = document.getElementById('whyBtn');
-        const closeHow = document.getElementById('closeHow');
-        const closeWhy = document.getElementById('closeWhy');
+        const aboutModal = document.getElementById('aboutModal');
 
-        // Modal functionality
-        howBtn.addEventListener('click', () => {
+        document.getElementById('howItWorksBtn').addEventListener('click', () => {
             howModal.classList.add('show');
-            document.body.style.overflow = 'hidden';
         });
 
-        whyBtn.addEventListener('click', () => {
-            whyModal.classList.add('show');
-            document.body.style.overflow = 'hidden';
+        document.getElementById('aboutBtn').addEventListener('click', () => {
+            aboutModal.classList.add('show');
         });
 
-        closeHow.addEventListener('click', () => {
+        // Footer modal triggers
+        document.getElementById('footerHow').addEventListener('click', (e) => {
+            e.preventDefault();
+            howModal.classList.add('show');
+        });
+
+        document.getElementById('footerAbout').addEventListener('click', (e) => {
+            e.preventDefault();
+            aboutModal.classList.add('show');
+        });
+
+        document.getElementById('closeHow').addEventListener('click', () => {
             howModal.classList.remove('show');
-            document.body.style.overflow = 'auto';
         });
 
-        closeWhy.addEventListener('click', () => {
-            whyModal.classList.remove('show');
-            document.body.style.overflow = 'auto';
+        document.getElementById('closeAbout').addEventListener('click', () => {
+            aboutModal.classList.remove('show');
         });
 
-        // Close modal when clicking outside
-        window.addEventListener('click', (event) => {
-            if (event.target === howModal) {
+        window.addEventListener('click', (e) => {
+            if (e.target === howModal) howModal.classList.remove('show');
+            if (e.target === aboutModal) aboutModal.classList.remove('show');
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
                 howModal.classList.remove('show');
-                document.body.style.overflow = 'auto';
-            }
-            if (event.target === whyModal) {
-                whyModal.classList.remove('show');
-                document.body.style.overflow = 'auto';
+                aboutModal.classList.remove('show');
             }
         });
 
-        // Add enter key support for quick search
-        queryInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
+        // Quick tags
+        document.querySelectorAll('.quick-tag').forEach(tag => {
+            tag.addEventListener('click', () => {
+                queryInput.value = tag.dataset.query;
                 searchForm.dispatchEvent(new Event('submit'));
-            }
+            });
         });
 
+        // Search
         searchForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            await performSearch();
-        });
-
-        async function performSearch() {
+            
             const query = queryInput.value.trim();
-            const location = locationInput.value.trim();
-            const searchType = searchTypeSelect.value;
-
             if (!query) {
                 showError('Please enter a search query');
                 return;
             }
 
             searchBtn.disabled = true;
-            const btnText = searchBtn.querySelector('span');
-            const btnIcon = searchBtn.querySelector('i');
-            btnIcon.className = 'fas fa-spinner fa-spin';
-            btnText.textContent = 'Searching...';
-            errorMessage.classList.remove('show');
+            searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
+            errorMsg.classList.remove('show');
             resultsSection.classList.remove('show');
 
             try {
-                const response = await fetch(`${API_BASE_URL}/api/search`, {
+                const response = await fetch(`${API_URL}/api/search`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         query: query,
-                        location: location,
-                        search_type: searchType,
+                        location: locationInput.value.trim(),
+                        search_type: searchTypeSelect.value,
                         top_k: 10
                     })
                 });
 
                 const data = await response.json();
                 
-                // Check if request was successful
                 if (!data.success && data.error) {
                     throw new Error(data.error);
                 }
-                
-                // Handle the results array
+
                 const results = data.results || data || [];
                 displayResults(Array.isArray(results) ? results : []);
-                
+
             } catch (error) {
-                showError('Error: ' + error.message + '. Make sure the API server is running on http://127.0.0.1:5000');
-                console.error('Search error:', error);
-                displayResults([]);
+                showError('Connection failed. Ensure the API server is running at ' + API_URL);
+                console.error(error);
             } finally {
                 searchBtn.disabled = false;
-                btnIcon.className = 'fas fa-search';
-                btnText.textContent = 'Search';
+                searchBtn.innerHTML = '<i class="fas fa-search"></i> Search';
             }
-        }
+        });
 
         function displayResults(results) {
             if (results.length === 0) {
                 resultsGrid.innerHTML = `
-                    <div class="no-results">
-                        <i class="fas fa-search"></i>
-                        <p>No internships found matching your criteria</p>
-                        <p style="font-size: 0.9em; color: #aaa;">Try adjusting your search keywords or location</p>
+                    <div class="no-results" style="grid-column: 1 / -1;">
+                        <div class="no-results-icon"><i class="fas fa-search"></i></div>
+                        <h3>No Results Found</h3>
+                        <p>Try different keywords or remove the location filter to discover more opportunities</p>
                     </div>
                 `;
-                resultsCount.textContent = 'No results found';
+                resultsCount.textContent = '0 results';
             } else {
-                resultsGrid.innerHTML = results.map(result => createResultCard(result)).join('');
-                resultsCount.textContent = `Found ${results.length} internship${results.length !== 1 ? 's' : ''} matching your criteria`;
+                resultsGrid.innerHTML = results.map(r => createCard(r)).join('');
+                resultsCount.textContent = `${results.length} result${results.length !== 1 ? 's' : ''} found`;
             }
-
             resultsSection.classList.add('show');
             resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        function createResultCard(result) {
-            const title = result.title || 'Untitled';
-            const company = result.company || 'Company Not Specified';
-            const category = result.category || 'General';
-            const description = result.description || 'No description available';
-            const skills = result.skills_required || '';
-            const relevanceScore = (result.relevance_score * 100).toFixed(1);
+        function createCard(r) {
+            const title = r.title || 'Untitled';
+            const company = r.company || 'Company not specified';
+            const category = r.category || '';
+            const location = r.location || '';
+            const description = r.description || '';
+            const skills = r.skills_required || '';
+            const score = Math.round((r.relevance_score || 0) * 100);
+            const distance = r.distance_km;
 
-            const skillsTags = skills
-                .split(',')
-                .map(skill => skill.trim())
-                .filter(skill => skill)
-                .slice(0, 5)
-                .map(skill => `<span class="skill-tag">${escapeHtml(skill)}</span>`)
+            const skillTags = skills.split(',')
+                .map(s => s.trim())
+                .filter(s => s)
+                .slice(0, 4)
+                .map(s => `<span class="skill">${escapeHtml(s)}</span>`)
                 .join('');
 
             return `
-                <div class="internship-card">
-                    <div class="card-content">
-                        <div class="card-header">
-                            <div>
-                                <div class="card-title">${escapeHtml(title)}</div>
-                                <div class="card-company">
-                                    <i class="fas fa-building"></i>
-                                    ${escapeHtml(company)}
-                                </div>
-                            </div>
-                            <div class="relevance-badge">${relevanceScore}% match</div>
+                <div class="card">
+                    <div class="card-top">
+                        <div>
+                            <div class="card-title">${escapeHtml(title)}</div>
+                            <div class="card-company">${escapeHtml(company)}</div>
                         </div>
-                        <span class="card-category">${escapeHtml(category)}</span>
-                        <p class="card-description">${escapeHtml(description)}</p>
-                        ${skillsTags ? `
-                            <div class="card-skills">
-                                <div class="card-skills-label">Key Skills Required</div>
-                                <div class="skills-list">${skillsTags}</div>
-                            </div>
-                        ` : ''}
-                        <div class="card-actions">
-                            <a href="https://internship.pmscheme.in/" target="_blank" rel="noopener noreferrer" class="card-btn primary">
-                                <i class="fas fa-external-link-alt"></i> Apply Now
-                            </a>
-                            <a href="https://internship.pmscheme.in/" target="_blank" rel="noopener noreferrer" class="card-btn">
-                                <i class="fas fa-info-circle"></i> Details
-                            </a>
-                        </div>
+                        <div class="card-score">${score}% match</div>
+                    </div>
+                    <div class="card-meta">
+                        ${category ? `<span class="card-meta-item"><i class="fas fa-tag"></i> ${escapeHtml(category)}</span>` : ''}
+                        ${location ? `<span class="card-meta-item"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(location)}</span>` : ''}
+                        ${distance ? `<span class="card-meta-item"><i class="fas fa-route"></i> ${distance.toFixed(1)} km</span>` : ''}
+                    </div>
+                    <div class="card-desc">${escapeHtml(description)}</div>
+                    ${skillTags ? `<div class="card-skills">${skillTags}</div>` : ''}
+                    <div class="card-actions">
+                        <a href="https://internship.pmscheme.in/" target="_blank" class="card-btn card-btn-primary">
+                            <i class="fas fa-paper-plane"></i> Apply Now
+                        </a>
+                        <a href="https://internship.pmscheme.in/" target="_blank" class="card-btn card-btn-secondary">
+                            <i class="fas fa-eye"></i> View Details
+                        </a>
                     </div>
                 </div>
             `;
         }
 
-        function showError(message) {
-            errorText.textContent = message;
-            errorMessage.classList.add('show');
-            errorMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        function showError(msg) {
+            errorMsg.textContent = msg;
+            errorMsg.classList.add('show');
         }
 
         function escapeHtml(text) {
-            const map = {
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                '"': '&quot;',
-                "'": '&#039;'
-            };
-            return text.replace(/[&<>"']/g, m => map[m]);
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
     </script>
 </body>
 </html>
