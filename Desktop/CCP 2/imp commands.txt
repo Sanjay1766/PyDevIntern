@@ -1,1 +1,0 @@
-cd "c:\Users\swathi sri\Desktop\CCP 2\pm_internship_ml" ; & "C:\Users\swathi sri\Desktop\CCP 2\.venv_new\Scripts\python.exe" backend/app.py
